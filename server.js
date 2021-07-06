@@ -1,6 +1,12 @@
 // Require the framework and instantiate it
 const fastify = require('fastify')({ logger: true })
 
+// Connexion à la BDD
+fastify.register(require('fastify-mongodb'), {
+  forceClose: true,
+  url: 'mongodb://localhost:27017/superheroes'
+})
+
 // METHOD API REST
 // GET - READ
 // POST - CREATE
@@ -16,6 +22,7 @@ fastify.get('/', (request, reply) => {
 // Déclarer la route /heroes - Cette route retournera la liste des avengers
 const avengers = ["Iron man", "Captain america", "Spiderman"]
 
+// /heroes GET - Obtiens la liste des héros
 fastify.get('/heroes', () => {
 	// return {
 	// 	avengers // équivalent à avengers: avengers
@@ -23,10 +30,19 @@ fastify.get('/heroes', () => {
 	return avengers
 })
 
+// /heroes POST - Ajoute un nouvel héro
+fastify.post('/heroes', (request, reply) => {
+	const collection = fastify.mongo.db.collection("heroes")
+	collection.insertOne(request.body)
+	return null
+	// reply.send(null)
+})
+
 fastify.get('/me', function () {
 	return {
 		prenom: "Fabio",
 		nom: "Ginja Domingues",
+		job: "developpeur"
 	}
 })
 
@@ -42,3 +58,5 @@ const start = async () => {
   }
 }
 start()
+
+
