@@ -26,8 +26,7 @@ fastify.get('/heroes', () => {
 fastify.get('/me', function () {
 	return {
 		prenom: "Fabio",
-		nom: "Ginja",
-		job: "developpeur",
+		nom: "Ginja Domingues",
 	}
 })
 
@@ -35,6 +34,7 @@ fastify.get('/me', function () {
 // Run the server!
 const start = async () => {
   try {
+		console.log("Serveur lancé: http://localhost:4000")
     await fastify.listen(4000)
   } catch (err) {
     fastify.log.error(err)
