@@ -36,14 +36,12 @@ GET http://localhost:4000/heroes/60e46dad8e9aa63e9ce37324
 GET http://localhost:4000/heroes/bio/60e564b2beb9654834d77596
 
 ###
-DELETE http://localhost:4000/heroes/60e564b2beb9654834d77596
+DELETE http://localhost:4000/heroes/60e59f686174306c8c4e6440
 
 ###
-PATCH http://localhost:4000/heroes/60e59f686174306c8c4e6440
+PATCH http://localhost:4000/heroes/60e5a656f8aa5f1f5002dad6
 Content-Type: application/json
 
 {
-	"biography": {
-		"full-name": "Bruce Wayne",
-	}
+	"biography.full-name": "Bruce Wayne"
 }
