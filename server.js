@@ -106,6 +106,28 @@ fastify.get('/me', function () {
 	}
 })
 
+// Je souhaite:
+// Une route qui me permette de créer un nouvel utilisateur (user) dans une collection users
+// 		- email
+// 		- password
+// 		- role (user/admin)
+// Une route qui me permette de récupérer tout les utilisateurs
+// Une route qui me permette de récupérer un utilisateur par son id
+// Une route qui me permette de mettre à jour un utilisateur par son id
+// Une route qui me permette de supprimer un utilisateur par son id
+
+fastify.post('/users', async (request, reply) => {
+	const collection = fastify.mongo.db.collection('users')
+	const result = await collection.insertOne(request.body)
+	return result.ops[0]
+})
+
+fastify.get('/users', async (request, reply) => {
+	const collection = fastify.mongo.db.collection('users')
+	const result = await collection.find().toArray()
+	return result
+})
+
 
 // Run the server!
 const start = async () => {
@@ -118,3 +140,4 @@ const start = async () => {
 	}
 }
 start()
+

@@ -45,3 +45,16 @@ Content-Type: application/json
 {
 	"biography.full-name": "Bruce Wayne"
 }
+
+###
+POST http://localhost:4000/users
+Content-Type: application/json
+
+{
+	"email": "medhi@email.com",
+	"password": "medhi",
+	"role": "user"
+}
+
+###
+GET http://localhost:4000/users
