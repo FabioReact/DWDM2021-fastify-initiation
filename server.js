@@ -3,6 +3,7 @@ const fastify = require('fastify')({ logger: true }) // https://www.fastify.io/d
 const { ObjectId } = require('mongodb') // https://docs.mongodb.com/drivers/node/current/fundamentals/
 const argon2 = require('argon2') // https://www.npmjs.com/package/argon2
 const createError = require('http-errors') // https://www.npmjs.com/package/http-errors
+const path = require('path')
 
 fastify.register(require('fastify-jwt'), {
   secret: 'monsupersecretamoiestungangster'
@@ -11,6 +12,12 @@ fastify.register(require('fastify-jwt'), {
 fastify.register(require('fastify-cors'), {
 	origin: "*"
 })
+
+fastify.register(require('fastify-static'), {
+  root: path.join(__dirname, 'public'),
+  prefix: '/public/', // optional: default '/'
+})
+
 
 
 // Connexion à la BDD
@@ -28,7 +35,7 @@ fastify.register(require('./src/routes/heroes'))
 // Declare a route
 fastify.get('/', (request, reply) => {
 	// Ici on retourne un objet javascript qui va être converti en JSON (JavaScript Object Notation)
-	return { hello: 'world' }
+	reply.sendFile('coucou.html')
 })
 
 fastify.get('/me', function () {
